@@ -158,8 +158,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 017d34a84e278304a8ed3da4389d0d1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Width: 10
-  Height: 10
+  Width: 4
+  Height: 4
   EdgeBoundsSize: 0.3
   boxSize: 1
   blankColor: {r: 1, g: 1, b: 1, a: 0.5882353}
