@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44459954, g: 0.49411047, b: 0.57337654, a: 1}
+  m_IndirectSpecularColor: {r: 0.44460016, g: 0.49411112, b: 0.5733775, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -158,13 +158,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 017d34a84e278304a8ed3da4389d0d1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Width: 4
-  Height: 4
+  Width: 5
+  Height: 5
   EdgeBoundsSize: 0.3
   boxSize: 1
   blankColor: {r: 1, g: 1, b: 1, a: 0.5882353}
-  playerColor: {r: 0, g: 0.72122526, b: 1, a: 0.5882353}
-  enemyColor: {r: 1, g: 0.13981165, b: 0, a: 0.5882353}
+  playerColor: {r: 1, g: 0.79510856, b: 0, a: 0.5882353}
+  enemyColor: {r: 0.2735849, g: 0.2735849, b: 0.2735849, a: 0.5882353}
   edgeObjectSrc: {fileID: 5313125747433916496, guid: a8db1a6cb46a3314085ccc8b8f5fac22,
     type: 3}
   boxObjectSrc: {fileID: 4114536801111473578, guid: 3b73a1b9e8174304fbad28426b3ddd55,

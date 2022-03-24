@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 public class Main : MonoBehaviour
 {
@@ -14,8 +15,8 @@ public class Main : MonoBehaviour
     float halfBoxSize;
 
     public Color blankColor = Color.white;
-    public Color playerColor = Color.blue;
-    public Color enemyColor = Color.red;
+    public Color playerColor = Color.yellow;
+    public Color enemyColor = Color.black;
 
     public EdgeObject edgeObjectSrc;
     public BoxObject boxObjectSrc;
@@ -315,10 +316,11 @@ public class Main : MonoBehaviour
         if(successActiveABox)
         {
             mainLoop = PlayerLoop;
+            Score.playerScore += 1;
         }
         else
         {
-            mainLoop = EnemyLoop;       
+            mainLoop = EnemyLoop;
         }
     }
 
@@ -543,6 +545,7 @@ public class Main : MonoBehaviour
         if (successActiveABox)
         {
             mainLoop = EnemyLoop;
+            ScoreEnemy.enemyScore += 1;
         }
         else
         {
@@ -553,22 +556,13 @@ public class Main : MonoBehaviour
 
     void Finish()
     {
-        runtimeData.playerScore = 0;
-        runtimeData.enemyScroe = 0;
-        for(int i = 0;i < runtimeData.boxes.Count; i++)
-        {
-            if (runtimeData.boxes[i].activeType == 1) runtimeData.playerScore++;
-            else runtimeData.enemyScroe++;
-        }
+        
 
-        mainLoop = DisplayEndingUI;
     }
 
-    void DisplayEndingUI()
+    void Restart()
     {
-        Debug.Log($"Player : {runtimeData.playerScore} | Enemy : {runtimeData.enemyScroe}");
-        //重置的话就重启吧
-        mainLoop = null;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
 }
