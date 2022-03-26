@@ -6,8 +6,8 @@ using UnityEngine.UIElements;
 
 public class Main : MonoBehaviour
 {
-    public int Width = 6;
-    public int Height = 4;
+    public static int Width = 6;
+    public static int Height = 4;
 
     public float EdgeBoundsSize = 0.2f;
     public float boxSize = 1.0f;
