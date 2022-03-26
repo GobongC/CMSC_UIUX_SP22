@@ -132,6 +132,7 @@ public class Main : MonoBehaviour
     /// 初始化格子
     /// </summary>
     /// <param name="boxCount"></param>
+
     void InitBox(int boxCount)
     {
         runtimeData.boxes = new List<GameBox>(boxCount);

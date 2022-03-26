@@ -18,6 +18,7 @@ public class player : MonoBehaviour
     void Update()
     {
        Swipe(); 
+       
     }
 
     public void Swipe()
@@ -37,6 +38,7 @@ public class player : MonoBehaviour
                 if(Distance.y < swipeRange)
                 {outputText.text = "Up";
                 stopTouch = true;
+                Debug.Log ("up");
 
             }
         }
@@ -50,6 +52,7 @@ public class player : MonoBehaviour
             if (Mathf.Abs(Distance.x)<tapRange && Mathf.Abs(Distance.y)<tapRange)
             {
                 outputText.text = "tap";
+                Debug.Log ("tap");
             }
         }
     }
