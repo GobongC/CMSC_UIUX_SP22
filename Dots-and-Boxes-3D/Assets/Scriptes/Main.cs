@@ -2,13 +2,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 
 public class Main : MonoBehaviour
 {
+    public GameOverScreen GameOverScreen;
     public int Width = 6;
     public int Height = 4;
+    public string Gameresult = "The Enemy";
 
     public float EdgeBoundsSize = 0.2f;
     public float boxSize = 1.0f;
@@ -555,14 +558,31 @@ public class Main : MonoBehaviour
     #endregion
 
     void Finish()
-    {
-        
+    {   
 
+        Debug.Log($"Player : {runtimeData.playerScore} | Enemy : {runtimeData.enemyScroe}");
+
+        if (ScoreEnemy.enemyScore > Score.playerScore)
+        {
+            Gameresult = "The Enemy ";
+            Debug.Log($"Gameresult = {Gameresult}");
+
+        }
+        else if (ScoreEnemy.enemyScore < Score.playerScore)
+        {
+            Gameresult = "The Player ";
+            Debug.Log($"Gameresult = {Gameresult}");
+
+        }
+
+        mainLoop = DisplayEndingUI;
+   
     }
 
-    void Restart()
+    void DisplayEndingUI()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Debug.Log($"Gameresult = {Gameresult}");
+        GameOverScreen.Setup(Gameresult);
     }
 
 }
