@@ -8,10 +8,8 @@ using UnityEngine.SceneManagement;
 
 public class Main : MonoBehaviour
 {
-    public GameOverScreen GameOverScreen;
-    public int Width = 6;
-    public int Height = 4;
-    public string Gameresult = "The Enemy";
+    public static int Width = 6;
+    public static int Height = 4;
 
     public float EdgeBoundsSize = 0.2f;
     public float boxSize = 1.0f;
@@ -138,6 +136,7 @@ public class Main : MonoBehaviour
     /// 初始化格子
     /// </summary>
     /// <param name="boxCount"></param>
+
     void InitBox(int boxCount)
     {
         runtimeData.boxes = new List<GameBox>(boxCount);
