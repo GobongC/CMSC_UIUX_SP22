@@ -11,10 +11,14 @@ public class MainMenu : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
 
-        public void QuitGame ()
+        public void ReturnToMainMenu()
         {
-            Debug.Log("quit");
-            Application.Quit();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        }
+
+        public void Restart()
+        {
+        SceneManager.LoadScene("Game");
         }
 
         public void changeGrid5 () { 
@@ -31,4 +35,5 @@ public class MainMenu : MonoBehaviour
             Main.Width = 7;
             Main.Height = 7;
         }
+
 }

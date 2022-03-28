@@ -2,7 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 public class Main : MonoBehaviour
 {
@@ -12,10 +14,12 @@ public class Main : MonoBehaviour
     public float EdgeBoundsSize = 0.2f;
     public float boxSize = 1.0f;
     float halfBoxSize;
+    public string Gameresult;
+    public GameOverScreen GameOverScreen;
 
     public Color blankColor = Color.white;
-    public Color playerColor = Color.blue;
-    public Color enemyColor = Color.red;
+    public Color playerColor = Color.yellow;
+    public Color enemyColor = Color.black;
 
     public EdgeObject edgeObjectSrc;
     public BoxObject boxObjectSrc;
@@ -36,6 +40,8 @@ public class Main : MonoBehaviour
     void Start()
     {
         mainLoop = Init;
+        ScoreEnemy.enemyScore = 0;
+        Score.playerScore = 0;
     }
 
     // Update is called once per frame
@@ -316,10 +322,11 @@ public class Main : MonoBehaviour
         if(successActiveABox)
         {
             mainLoop = PlayerLoop;
+            Score.playerScore += 1;
         }
         else
         {
-            mainLoop = EnemyLoop;       
+            mainLoop = EnemyLoop;
         }
     }
 
@@ -544,6 +551,7 @@ public class Main : MonoBehaviour
         if (successActiveABox)
         {
             mainLoop = EnemyLoop;
+            ScoreEnemy.enemyScore += 1;
         }
         else
         {
@@ -553,23 +561,32 @@ public class Main : MonoBehaviour
     #endregion
 
     void Finish()
-    {
-        runtimeData.playerScore = 0;
-        runtimeData.enemyScroe = 0;
-        for(int i = 0;i < runtimeData.boxes.Count; i++)
+    {   
+
+        Debug.Log($"Player : {runtimeData.playerScore} | Enemy : {runtimeData.enemyScroe}");
+
+        if (ScoreEnemy.enemyScore > Score.playerScore)
         {
-            if (runtimeData.boxes[i].activeType == 1) runtimeData.playerScore++;
-            else runtimeData.enemyScroe++;
+            Gameresult = "The Enemy ";
+            Debug.Log($"Gameresult = {Gameresult}");
+
+        }
+        else if (ScoreEnemy.enemyScore < Score.playerScore)
+        {
+            Gameresult = "The Player ";
+            Debug.Log($"Gameresult = {Gameresult}");
+
         }
 
         mainLoop = DisplayEndingUI;
+   
     }
 
     void DisplayEndingUI()
     {
-        Debug.Log($"Player : {runtimeData.playerScore} | Enemy : {runtimeData.enemyScroe}");
-        //重置的话就重启吧
-        mainLoop = null;
+        
+        Debug.Log($"Gameresult = {Gameresult}");
+        GameOverScreen.Setup(Gameresult);
     }
 
 }
