@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class Main : MonoBehaviour
 {
-    public static int Width = 6;
+    public static int Width = 4;
     public static int Height = 4;
 
     public float EdgeBoundsSize = 0.2f;
@@ -24,6 +24,7 @@ public class Main : MonoBehaviour
     public EdgeObject edgeObjectSrc;
     public BoxObject boxObjectSrc;
     public GameObject playerInputInfo;
+    public GameObject replayScreen;
 
     RuntimeData runtimeData = new RuntimeData();
     Camera mainCam;
@@ -584,7 +585,7 @@ public class Main : MonoBehaviour
 
     void DisplayEndingUI()
     {
-        
+        replayScreen.SetActive(true);
         Debug.Log($"Gameresult = {Gameresult}");
         GameOverScreen.Setup(Gameresult);
     }
