@@ -14,6 +14,8 @@ public class Main : MonoBehaviour
     public float EdgeBoundsSize = 0.2f;
     public float boxSize = 1.0f;
     float halfBoxSize;
+    public string Gameresult;
+    public GameOverScreen GameOverScreen;
 
     public Color blankColor = Color.white;
     public Color playerColor = Color.yellow;
