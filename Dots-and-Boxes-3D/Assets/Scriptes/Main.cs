@@ -16,6 +16,7 @@ public class Main : MonoBehaviour
     float halfBoxSize;
     public string Gameresult;
     public GameOverScreen GameOverScreen;
+    public Icon_Glow Icon_Glow;
 
     public Color blankColor = Color.white;
     public Color playerColor = Color.yellow;
@@ -270,9 +271,9 @@ public class Main : MonoBehaviour
 
     void PlayerLoop()
     {
+        
         Ray cameraRay = mainCam.ScreenPointToRay(Input.mousePosition);
         Vector3 castPoint = MathEx.RayCastPlane(cameraRay, tableNormal, Vector3.zero);
-
         Vector3 infoFloatPoint = castPoint;
 
         for (int i = 0; i < runtimeData.edges.Count; i++)
@@ -298,7 +299,6 @@ public class Main : MonoBehaviour
     void PlayerSetLine()
     {
         //Debug.Log($"Player Active {perActiveEdge}");
-
         //当玩家设置的线条激活了一个Box，则继续回到玩家操作
         bool successActiveABox = false;
         runtimeData.edges[perActiveEdge].activeType = 1;
@@ -322,11 +322,14 @@ public class Main : MonoBehaviour
 
         if(successActiveABox)
         {
-            mainLoop = PlayerLoop;
+            
             Score.playerScore += 1;
+            mainLoop = PlayerLoop;
+            
         }
         else
         {
+            Icon_Glow.TurnP1_Off();
             mainLoop = EnemyLoop;
         }
     }
@@ -551,12 +554,15 @@ public class Main : MonoBehaviour
 
         if (successActiveABox)
         {
-            mainLoop = EnemyLoop;
             ScoreEnemy.enemyScore += 1;
+            mainLoop = EnemyLoop;
+            
         }
         else
         {
+            Icon_Glow.TurnP1_On();
             mainLoop = PlayerLoop;
+            
         }
     }
     #endregion
