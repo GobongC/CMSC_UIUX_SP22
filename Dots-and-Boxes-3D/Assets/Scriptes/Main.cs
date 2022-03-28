@@ -40,6 +40,8 @@ public class Main : MonoBehaviour
     void Start()
     {
         mainLoop = Init;
+        ScoreEnemy.enemyScore = 0;
+        Score.playerScore = 0;
     }
 
     // Update is called once per frame
@@ -581,6 +583,7 @@ public class Main : MonoBehaviour
 
     void DisplayEndingUI()
     {
+        
         Debug.Log($"Gameresult = {Gameresult}");
         GameOverScreen.Setup(Gameresult);
     }
