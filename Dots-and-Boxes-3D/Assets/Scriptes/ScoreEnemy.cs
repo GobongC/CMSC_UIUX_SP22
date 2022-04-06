@@ -2,22 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ScoreEnemy : MonoBehaviour
 {
     RuntimeData runtimeData = new RuntimeData();
+
     public static int enemyScore = 0;
-    Text eScore;
+
+    public TextMeshProUGUI eScore;
 
     void Start()
     {
-        eScore = GetComponent<Text>();
+        eScore = GetComponent<TMPro.TextMeshProUGUI>();
 
     }
     void Update()
     {
 
-        eScore.text = "P2 Score: " + enemyScore;
+        eScore.text = enemyScore.ToString();
 
     }
 }
