@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,17 +6,16 @@ using UnityEngine.UI;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 
-public class Main : MonoBehaviour
+public class MultiMain : MonoBehaviour
 {
-    public static int Width = 5;
-    public static int Height = 5;
+    public static int MultiWidth = 5;
+    public static int MultiHeight = 5;
 
     public float EdgeBoundsSize = 0.2f;
     public float boxSize = 1.0f;
     float halfBoxSize;
     public string Gameresult;
     public GameOverScreen GameOverScreen;
-    public Icon_Glow Icon_Glow;
 
     public Color blankColor = Color.white;
     public Color playerColor = Color.yellow;
@@ -113,7 +112,7 @@ public class Main : MonoBehaviour
             switch (edgeSetType)
             {
                 case EdgeSetType.H:
-                    if (currentEdgeX >= Width)
+                    if (currentEdgeX >= MultiWidth)
                     {
                         currentEdgeX = 0;
                         currentEdgeY += halfBoxSize;
@@ -121,7 +120,7 @@ public class Main : MonoBehaviour
                     }
                     break;
                 case EdgeSetType.V:
-                    if (currentEdgeX >= (Width + 1))
+                    if (currentEdgeX >= (MultiWidth + 1))
                     {
                         currentEdgeX = 0;
                         edgeSetType = EdgeSetType.H;
@@ -149,8 +148,8 @@ public class Main : MonoBehaviour
         for (int i = 0; i < boxCount; i++)
         {
             GameBox b = new GameBox();
-            int x = i % Width;
-            int y = i / Width;
+            int x = i % MultiWidth;
+            int y = i / MultiWidth;
 
             b.position = new Vector3(x * boxSize, 0, y * boxSize);
 
@@ -160,9 +159,9 @@ public class Main : MonoBehaviour
             int upY = downY + 2;
 
             //参考项目文件夹下的 棋盘格分配算法 文件
-            int ed = downY * Width + y + x;
-            int eu = upY * Width + y + x + 1;
-            int el = leftY * Width + y + x;
+            int ed = downY * MultiWidth + y + x;
+            int eu = upY * MultiWidth + y + x + 1;
+            int el = leftY * MultiWidth + y + x;
             int er = el + 1;
 
             //设置边缘
@@ -185,10 +184,10 @@ public class Main : MonoBehaviour
         InitData();
         UnityEngine.Random.InitState(System.DateTime.Now.Millisecond);
         //初始化场景
-        int edgeCount = Width * (2 * Height + 1) + Height;
+        int edgeCount = MultiWidth * (2 * MultiHeight + 1) + MultiHeight;
         InitEdge(edgeCount);
 
-        int boxCount = Width * Height;
+        int boxCount = MultiWidth * MultiHeight;
         InitBox(boxCount);
 
 
@@ -271,9 +270,9 @@ public class Main : MonoBehaviour
 
     void PlayerLoop()
     {
-        
         Ray cameraRay = mainCam.ScreenPointToRay(Input.mousePosition);
         Vector3 castPoint = MathEx.RayCastPlane(cameraRay, tableNormal, Vector3.zero);
+
         Vector3 infoFloatPoint = castPoint;
 
         for (int i = 0; i < runtimeData.edges.Count; i++)
@@ -299,6 +298,7 @@ public class Main : MonoBehaviour
     void PlayerSetLine()
     {
         //Debug.Log($"Player Active {perActiveEdge}");
+
         //当玩家设置的线条激活了一个Box，则继续回到玩家操作
         bool successActiveABox = false;
         runtimeData.edges[perActiveEdge].activeType = 1;
@@ -322,26 +322,16 @@ public class Main : MonoBehaviour
 
         if(successActiveABox)
         {
-            
-            Score.playerScore += 1;
             mainLoop = PlayerLoop;
-            
+            Score.playerScore += 1;
         }
         else
         {
-            Icon_Glow.TurnP1_Off();
             mainLoop = EnemyLoop;
         }
     }
 
-    //AI流程
-    //先复制一份用于AI计算的列表
-    //然后遍历未被操作的边
-    //逐个未被操作边进行操作，并把新的表迭代多次，如果操作对应边可以获得一个格，则给对应边操作+1分
-    //如果下一个回合会被玩家获得成绩，则对应格操作-1分
-    //预测玩家回合如果玩家的预期操作不能引起玩家得分，则无视这次玩家操作
-    //迭代目标次数后结束递归
-    //全部遍历结束后，挑选积分最高的选项随机一个执行
+  
 
     List<Edge> CopyEdges(List<Edge> edge)
     {
@@ -457,76 +447,29 @@ public class Main : MonoBehaviour
     public int Depth = 0;
     void EnemyLoop()
     {
-        List<Edge> aiEdges = CopyEdges(runtimeData.edges);
-        List<GameBox> aiBoxes = CopyBoxes(runtimeData.boxes);
+        Ray cameraRay = mainCam.ScreenPointToRay(Input.mousePosition);
+        Vector3 castPoint = MathEx.RayCastPlane(cameraRay, tableNormal, Vector3.zero);
 
-        //积分板
-        int[] score = new int[aiEdges.Count];
+        Vector3 infoFloatPoint = castPoint;
 
-        //递归深度
-        int depth = Depth;
-
-        string sout = "";
-        for(int i = 0; i < aiEdges.Count; i++)
+        for (int i = 0; i < runtimeData.edges.Count; i++)
         {
-            if(aiEdges[i].activeType == 0)
+            //当鼠标指向的地方未被选择，则悬停
+            if (runtimeData.edges[i].bounds.Contains(castPoint) && runtimeData.edges[i].activeType == 0)
             {
-                score[i] = 0;
-                //以下的操作在Try完一次之后都要恢复原状
-                aiEdges[i].activeType = 2;
+                infoFloatPoint = runtimeData.edges[i].bounds.center;
 
-                //找出与当前边共边的全部Box
-                //与当前操作边共边的Box里面包含了尚未被填充且顺利包围的Box
-                //则将其设置为Enemy激活模式
-                //当ctrlBoxes不为空的时候，说明至少获得一分，因此下一个回合都是自己，否则下个回合将轮到玩家
-                var connectBoxes = aiBoxes.FindAll(s => s.edges.Contains(i));
-                
-                var ctrlBoxes = connectBoxes.FindAll(s => (s.activeType == 0 && s.AllEdgeSet(aiEdges)));
-                if (ctrlBoxes.Count > 0)
+                //当点击
+                if (Input.GetMouseButtonUp(0))
                 {
-                    for(int j = 0; j < ctrlBoxes.Count; j++)
-                    {
-                        ctrlBoxes[j].activeType = 2;
-                    }
-                    //增加积分：因为找出了全部可被激活的情况，所以数组长度代表了成功激活的个数，因此数组长度 = 分数
-                    score[i] += ctrlBoxes.Count;
-                    TryLine(aiEdges, aiBoxes, 1, score, i, depth);
-                    sout += $"{i}. AI |";
+                    //设置玩家选中的线条
+                    perActiveEdge = i;
+                    mainLoop = EnemySetLine;
+                    break;
                 }
-                else //没有可以被激活的Box的时候轮到玩家回合
-                {
-                    sout += $"{i}. 玩家 |";
-                    TryLine(aiEdges, aiBoxes, 0, score, i, depth);
-                }
-
-                //恢复操作前状态
-                aiEdges[i].activeType = 0;
-                for (int j = 0; j < ctrlBoxes.Count; j++)
-                {
-                    ctrlBoxes[j].activeType = 0;
-                }
-            }
-            else
-            {
-                score[i] = -999999;
             }
         }
-        //Debug.Log(sout);
-
-
-        //sout = "";
-        //for(int i = 0; i < score.Length; i++)
-        //{
-        //    sout += $"{i}. {score[i]} |";
-        //}
-        //Debug.Log(sout);
-
-        //排序选出，并把最高积分的边随机作为下一次操作目标
-        var sortedIndex = GetMaxValuesIndex(score);
-        int _select = UnityEngine.Random.Range(0, sortedIndex.Count);
-        perActiveEdge = sortedIndex[_select];
-        //Debug.Log(perActiveEdge);
-        mainLoop = EnemySetLine;
+        playerInputInfo.transform.position = infoFloatPoint;
     }
 
     void EnemySetLine()
@@ -554,15 +497,12 @@ public class Main : MonoBehaviour
 
         if (successActiveABox)
         {
-            ScoreEnemy.enemyScore += 1;
             mainLoop = EnemyLoop;
-            
+            ScoreEnemy.enemyScore += 1;
         }
         else
         {
-            Icon_Glow.TurnP1_On();
             mainLoop = PlayerLoop;
-            
         }
     }
     #endregion
