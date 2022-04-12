@@ -16,7 +16,6 @@ public class Main : MonoBehaviour
     float halfBoxSize;
     public string Gameresult;
     public GameOverScreen GameOverScreen;
-    public Icon_Glow Icon_Glow;
 
     public Color blankColor = Color.white;
     public Color playerColor = Color.yellow;
@@ -26,6 +25,8 @@ public class Main : MonoBehaviour
     public BoxObject boxObjectSrc;
     public GameObject playerInputInfo;
     public GameObject replayScreen;
+    public Icon_Glow Icon_Glow;
+    public Icon_GlowCPU Icon_GlowCPU;
 
     RuntimeData runtimeData = new RuntimeData();
     Camera mainCam;
@@ -276,6 +277,7 @@ public class Main : MonoBehaviour
         Vector3 castPoint = MathEx.RayCastPlane(cameraRay, tableNormal, Vector3.zero);
         Vector3 infoFloatPoint = castPoint;
 
+
         for (int i = 0; i < runtimeData.edges.Count; i++)
         {
             //当鼠标指向的地方未被选择，则悬停
@@ -330,6 +332,7 @@ public class Main : MonoBehaviour
         else
         {
             Icon_Glow.TurnP1_Off();
+            Icon_GlowCPU.TurnCPU_On();
             mainLoop = EnemyLoop;
         }
     }
@@ -467,9 +470,9 @@ public class Main : MonoBehaviour
         int depth = Depth;
 
         string sout = "";
-        for(int i = 0; i < aiEdges.Count; i++)
+        for (int i = 0; i < aiEdges.Count; i++)
         {
-            if(aiEdges[i].activeType == 0)
+            if (aiEdges[i].activeType == 0)
             {
                 score[i] = 0;
                 //以下的操作在Try完一次之后都要恢复原状
@@ -480,11 +483,11 @@ public class Main : MonoBehaviour
                 //则将其设置为Enemy激活模式
                 //当ctrlBoxes不为空的时候，说明至少获得一分，因此下一个回合都是自己，否则下个回合将轮到玩家
                 var connectBoxes = aiBoxes.FindAll(s => s.edges.Contains(i));
-                
+
                 var ctrlBoxes = connectBoxes.FindAll(s => (s.activeType == 0 && s.AllEdgeSet(aiEdges)));
                 if (ctrlBoxes.Count > 0)
                 {
-                    for(int j = 0; j < ctrlBoxes.Count; j++)
+                    for (int j = 0; j < ctrlBoxes.Count; j++)
                     {
                         ctrlBoxes[j].activeType = 2;
                     }
@@ -526,6 +529,13 @@ public class Main : MonoBehaviour
         int _select = UnityEngine.Random.Range(0, sortedIndex.Count);
         perActiveEdge = sortedIndex[_select];
         //Debug.Log(perActiveEdge);
+        StartCoroutine(EnemyPause());
+        
+    }
+
+    IEnumerator EnemyPause()
+    {
+        yield return new WaitForSeconds(1);
         mainLoop = EnemySetLine;
     }
 
@@ -561,8 +571,9 @@ public class Main : MonoBehaviour
         else
         {
             Icon_Glow.TurnP1_On();
+            Icon_GlowCPU.TurnCPU_Off();
             mainLoop = PlayerLoop;
-            
+
         }
     }
     #endregion
