@@ -45,6 +45,8 @@ public class MultiMain : MonoBehaviour
         mainLoop = Init;
         ScoreEnemy.enemyScore = 0;
         Score.playerScore = 0;
+        Icon_Glow.TurnP1_On();
+        Icon_GlowCPU.TurnCPU_Off();
     }
 
     // Update is called once per frame
