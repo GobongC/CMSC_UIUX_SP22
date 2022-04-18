@@ -25,6 +25,8 @@ public class MultiMain : MonoBehaviour
     public BoxObject boxObjectSrc;
     public GameObject playerInputInfo;
     public GameObject replayScreen;
+    public Icon_Glow Icon_Glow;
+    public Icon_GlowCPU Icon_GlowCPU;
 
     RuntimeData runtimeData = new RuntimeData();
     Camera mainCam;
@@ -327,6 +329,8 @@ public class MultiMain : MonoBehaviour
         }
         else
         {
+            Icon_Glow.TurnP1_Off();
+            Icon_GlowCPU.TurnCPU_On();
             mainLoop = EnemyLoop;
         }
     }
@@ -502,6 +506,8 @@ public class MultiMain : MonoBehaviour
         }
         else
         {
+            Icon_Glow.TurnP1_On();
+            Icon_GlowCPU.TurnCPU_Off();
             mainLoop = PlayerLoop;
         }
     }

@@ -29,6 +29,8 @@ public class MainMenu : MonoBehaviour
         public void changeGrid5 () { 
             Main.Width = 5;
             Main.Height = 5;
+            MultiMain.MultiWidth = 5;
+            MultiMain.MultiHeight = 5;
             myVector = new Vector3(3f,4f,2.25f);
             //CameraPosition.move(myVector);
         }
@@ -36,6 +38,8 @@ public class MainMenu : MonoBehaviour
         public void changeGrid6 () { 
             Main.Width = 6;
             Main.Height = 6;
+            MultiMain.MultiWidth = 6;
+            MultiMain.MultiHeight = 6;
             myVector = new Vector3(3f,4f,2.25f);
             //CameraPosition.move(myVector);
         }
@@ -43,6 +47,8 @@ public class MainMenu : MonoBehaviour
         public void changeGrid7 () { 
             Main.Width = 7;
             Main.Height = 7;
+            MultiMain.MultiWidth = 7;
+            MultiMain.MultiHeight = 7;
             myVector = new Vector3(3f,4f,2.25f);
             //CameraPosition.move(myVector);
         }

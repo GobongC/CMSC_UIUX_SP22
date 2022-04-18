@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44460016, g: 0.49411112, b: 0.5733775, a: 1}
+  m_IndirectSpecularColor: {r: 0.44459954, g: 0.49411047, b: 0.57337654, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -628,8 +628,8 @@ MonoBehaviour:
   Gameresult: The Enemy
   GameOverScreen: {fileID: 978483298}
   blankColor: {r: 1, g: 1, b: 1, a: 0.5882353}
-  playerColor: {r: 1, g: 0.79510856, b: 0, a: 0.5882353}
-  enemyColor: {r: 0.2735849, g: 0.2735849, b: 0.2735849, a: 0.5882353}
+  playerColor: {r: 0.093085766, g: 1, b: 0, a: 0.5882353}
+  enemyColor: {r: 1, g: 0, b: 0, a: 0.5882353}
   edgeObjectSrc: {fileID: 5313125747433916496, guid: a8db1a6cb46a3314085ccc8b8f5fac22,
     type: 3}
   boxObjectSrc: {fileID: 4114536801111473578, guid: 3b73a1b9e8174304fbad28426b3ddd55,
