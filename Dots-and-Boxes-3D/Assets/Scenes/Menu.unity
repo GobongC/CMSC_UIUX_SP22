@@ -897,24 +897,25 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Close more boxes than your opponent!\n\nIn order to close a box you have
-    to connect the dots horizontally or vertically.\n\nLink two dots by touching
-    between them. \nWhen you do that, you draw segments of a square and when you
-    palce the 4th segment of a 1x1 square that box becomes yours and is filled with
+  m_text: "\nClose more boxes than your opponent!\n\n\nIn order to close a box you
+    have to connect the dots horizontally or vertically.\n\nLink two dots by touching
+    between them. \n\nWhen you do that, you draw segments of a square and when you
+    place the 4th segment of a 1x1 square that box becomes yours and is filled with
     your own color (regardless of which player had drawn the other segments of that
-    box.)\n\nYou play in turn with your opponent, but whenever a player gains a box
-    they can continue to play another turn.\n\nThe game ends when there are no more
-    dots to link and the player with the more boxes wins!\n\n"
+    box).\n\nYou play in turn with your opponent, but whenever a player gains a box
+    they can continue to play another turn.\n\nThe score is the number of boxes you
+    have closed.\n\nThe game ends when there are no more dots to link and the player
+    with the more boxes wins!\n\nHave fun playing!\n\n\n"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -931,8 +932,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 45
+  m_fontSizeBase: 45
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -967,7 +968,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 180.44333, y: 490.58252, z: 166.00757, w: 93.78778}
+  m_margin: {x: 82.63684, y: 490.58252, z: 63.75537, w: -180.24951}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
