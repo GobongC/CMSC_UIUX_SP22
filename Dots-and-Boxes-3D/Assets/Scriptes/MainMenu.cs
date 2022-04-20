@@ -63,4 +63,8 @@ public class MainMenu : MonoBehaviour
             //CameraPosition.move(myVector);
         }
 
+        public void SplashScreen() {
+            SceneManager.LoadScene("Menu");
+        }
+
 }
