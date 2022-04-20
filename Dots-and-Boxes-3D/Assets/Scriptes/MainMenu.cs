@@ -31,6 +31,11 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("Game");
         }
 
+        public void RestartMulti()
+        {
+            SceneManager.LoadScene("multiGame");
+        }
+
         public void changeGrid5 () { 
             Main.Width = 5;
             Main.Height = 5;
