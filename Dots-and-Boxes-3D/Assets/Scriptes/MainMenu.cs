@@ -13,17 +13,17 @@ public class MainMenu : MonoBehaviour
     
         public void PlayGame ()
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            SceneManager.LoadScene("Game");
         }
 
         public void PlayGameMulti ()
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
+            SceneManager.LoadScene("multiGame");
         }
 
         public void ReturnToMainMenu()
         {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        SceneManager.LoadScene("Menu");
         }
 
         public void Restart()
