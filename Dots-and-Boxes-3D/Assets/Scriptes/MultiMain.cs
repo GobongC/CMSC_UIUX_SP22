@@ -8,8 +8,8 @@ using UnityEngine.SceneManagement;
 
 public class MultiMain : MonoBehaviour
 {
-    public static int MultiWidth = 5;
-    public static int MultiHeight = 5;
+    public static int MultiWidth = 3;
+    public static int MultiHeight = 3;
 
     public float EdgeBoundsSize = 0.2f;
     public float boxSize = 1.0f;

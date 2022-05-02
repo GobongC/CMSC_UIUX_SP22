@@ -4,9 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class ResultText : MonoBehaviour
-{
 
+public class ResultTextMulti : MonoBehaviour
+{
+    
     RuntimeData runtimeData = new RuntimeData();
     public TextMeshProUGUI rScore;
     
@@ -15,21 +16,15 @@ public class ResultText : MonoBehaviour
    {
    if (Score.playerScore>Score.enemyScore)
    {
-        Debug.Log(Score.playerScore);
-        Debug.Log(Score.enemyScore);
-        rScore.text = ("You Won!");
+        rScore.text = ("Player One Wins!");
    }
    else if(Score.playerScore == Score.enemyScore)
    {
-        Debug.Log(Score.playerScore);
-        Debug.Log(Score.enemyScore);
         rScore.text = ("It's a tie!");
    }
    else
    {
-        Debug.Log(Score.playerScore);
-        Debug.Log(Score.enemyScore);
-        rScore.text = ("You Lost!");
+        rScore.text = ("Player Two Wins!");
    }
    
    }

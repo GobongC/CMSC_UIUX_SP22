@@ -8,8 +8,8 @@ using UnityEngine.SceneManagement;
 
 public class Main : MonoBehaviour
 {
-    public static int Width = 5;
-    public static int Height = 5;
+    public static int Width = 6;
+    public static int Height = 6;
 
     public float EdgeBoundsSize = 0.2f;
     public float boxSize = 1.0f;
